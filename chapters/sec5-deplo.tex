@@ -1,0 +1,61 @@
+\section{Istruzioni per il deployment}
+In questo capitolo illustreremo come poter deployare l'applicativo.\newline
+
+\noindent Oltre alla versione in locale, utilizzata in fase di sviluppo e testing abbiamo cercato di rendere disponibile una versione online funzionante, così da testarne in maniera più accurata alcuni aspetti e ottenere feedback da utenti reali facendoli interagire con il sistema. \newline
+
+\noindent Per accedere a questa versione online sarà sufficiente recarsi al link \url{http://18.191.42.219/} (L'indirizzo dipende dal servizio di Amazon a cui ci siamo affidati, pertanto potrebbe subire modifiche).
+
+\subsection{Database setup}
+Il primo passo per poter utilizzare il sistema in locale è quello di creare un database MySql partendo dal codice del file
+
+\begin{minted}{bash}
+   /GuessR_DB/final_guessrdb.sql
+\end{minted}
+
+\noindent a tal scopo nei nostri terminali abbiamo utilizzato il software XAMPP e abbiamo interagito con il database grazie al tool phpMyAdmin.
+
+\subsection{Server}
+Grazie all'utilizzo di Gradle il deployment del server risulta automatizzato e intuitivo. È sufficiente che la macchina sulla quale si vuole eseguire il server abbia installato un JRE con Java dalla versione 11 in poi e, dopo essersi posizionati all'interno della cartella di progetto tramite terminale (guessrServer), sarà sufficiente lanciare il comando
+
+\begin{minted}{bash}
+    ./gradlew run
+\end{minted}
+
+\noindent nel caso in cui non si abbia una installazione locale di Gradle o si preferisca utilizzare la stessa impiegata nel progetto; alternativamente è possibile lanciare il comando
+
+\begin{minted}{bash}
+    gradle run
+\end{minted}
+
+\noindent nel caso in cui si voglia utilizzare la propria versione di Gradle, installata in locale.
+Tale terminale ci mostrerà a questo punto la buona riuscita dell'avvio del server e alcune stampe che notificano i principali avvenimenti lato server. \newline
+
+\noindent Nella nostra esperienza, avendo noi affittato la tier gratuita di un server Amazon AWS, data la limitata capacità di calcolo fornita nella versione gratuita non è stato possibile compilare il server sulla macchina Amazon. Pertanto abbiamo optato per un'altra soluzione, che consiste nella compilazione del file .jar nelle nostre macchine in locale e trasferire solo quest'ultimo nel server remoto.\newline
+
+\noindent Per fare ciò è sufficiente posizionarsi sulla cartella del progetto per poi lanciare il comando
+
+\begin{minted}{bash}
+    gradle shadowJar
+\end{minted}
+
+
+\subsection{Web-Client}
+Per quanto riguarda il lato client sarà sufficiente l'installazione di npm, che provvederà autonomamente all'import delle dipendenze necessarie e al setup dell'ambiente relativo a Node.js. \newline
+
+\noindent Una volta provveduto all'apertura di un ulteriore terminale, sarà necessario spostarsi all'interno della cartella "guessr-client-web" e lanciare il comando
+
+\begin{minted}{bash}
+    npm install
+\end{minted}
+
+che provvederà all'import di tutte le librerie npm utilizzate dal client. Una volta terminato il download delle dipendenze per avviare il client sarà sufficiente lanciare il comando
+
+\begin{minted}{bash}
+    npm start
+\end{minted}
+
+Nel caso in cui ci si voglia collegare al server remoto sarà necessario modificare la variabile "serverUrl" all'interno del file "src/util/util.js" impostando come URL http://18.191.42.219/ .
+
+\subsubsection{Mobile-Client}
+Una volta effettuato il deploy del client web è possibile anche utilizzare l'app di GuessR dal proprio telefono. Sarà sufficiente scaricare il pacchetto relativo al proprio sistema operativo (apk nel caso di Android) ed installarlo. L'app avrà le stesse funzionalità di un web client desktop, in questo modo sarà possibile giocare a GuessR ovunque!
+\newpage

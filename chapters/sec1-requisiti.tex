@@ -1,0 +1,66 @@
+\section{Analisi dei Requisiti}
+\subsection{Obiettivi}
+L’idea di progetto consisterebbe nel creare un’architettura Client-Server che permetta lo svolgimento del gioco appena descritto.\newline
+\noindent Il server coordinerebbe i giocatori, orchestrandone gli stati, con l’idea di rendere il gioco scalabile. Si vuole rendere fruibile il gioco a client web e mobile, per permettere a più giocatori possibile di giocare, senza necessità che tutti scelgano contemporaneamente la versione web o la versione mobile. Inoltre, vorremmo opzionalmente fornire una chat con la quale i giocatori possano comunicare durante la partita.\newline
+Per la prioritizzazione dei nostri obiettivi utilizzeremo il metodo MoSCoW ~\cite{MetodoMo:online}:
+\begin{enumerate}
+    \item \textit{MUST}:
+    \begin{itemize}
+        \item Modellazione di tutti i sistemi tramite rappresentazioni di Ingegneria del Software;
+        \item Gestione delle stanze lato Server;
+        \item Gestione degli stati di gioco lato Server;        \item Creazione di un client Web;
+        \item Creazione di Test per verificare il corretto funzionamento del sistema.
+    \end{itemize}
+    \item \textit{SHOULD}:
+    \begin{itemize}
+        \item Creazione di un client Mobile;
+    \end{itemize}
+    \item \textit{WOULD}:
+        \begin{itemize}
+            \item Implementazione di un sistema di messaggistica;
+            \item Possibilità di consultare i report delle partite passate.
+        \end{itemize}
+    \item \textit{WON'T}:
+    \begin{itemize}
+        \item Un'interfaccia grafica e curata nel dettaglio e personalizzata.
+    \end{itemize}
+\end{enumerate}
+\noindent Nell'implementazione valuteremo l'utilizzo e l'integrazione di Framework e librerie per semplificare il lavoro e migliorare l'ingegnerizzazione del sistema.\newline
+Nello specifico:
+\begin{itemize}
+    \item Verrà utilizzato il tool-kit Eclipse Vert.X ~\cite{VertX:online} per la realizzazione della parte server. Per il testing verrà principalmente utilizzato JUnit ~\cite{JUnit576:online};
+    \item Verrà utilizzato React.js ~\cite{React:online} come base Javascript per la realizzazione della parte client in combinazione con Redux ~\cite{redux:online} per quanto riguarda la gestione degli stati.
+    \item Per la parte mobile abbiamo deciso di creare un'app react native che permetta il più possibile il riuso del codice lato client web, reso responsive utilizzando Bootstrap.
+    \item Verranno utilizzati Gradle per la build automation lato server  ~\cite{GradleEnterprise:online} e npm ~\cite{npm:online} per la gestione dei pacchetti lato Javascript.
+\end{itemize}
+\subsection{Expected Deliverables}
+Il gruppo si impegna a consegnare:
+\begin{itemize}
+    \item la struttura di un database relazionale in cui verranno memorizzati i dati degli utenti;
+    \item i sorgenti dello stateful server;
+    \item i sorgenti dei relativi client (web e mobile).
+\end{itemize}
+\subsection{Divisione del Lavoro}
+Tenendo conto delle attuali restrizioni alla mobilità, la divisione del lavoro verrà valutata dinamicamente utilizzando strumenti di comunicazione telematica.\newline
+In linea di massima però, è stata definita una scaletta alla quale cercheremo di attenerci:
+\begin{enumerate}
+    \item La fase di progettazione verrà svolta congiuntamente da tutti i membri del gruppo, al fine di una comprensione coesa dell'architettura del progetto;
+    \item La definizione della struttura del Database verrà anch'essa svolta congiuntamente, mentre la sua implementazione verrà affidata ad un solo membro del gruppo che, dopo averla portata a termine si unirà alla prossima fase;
+    \item Durante l'implementazione del DB, gli altri membri del gruppo inizieranno a creare lo scheletro del server, creando le basi per poter parallelizzare il lavoro;
+    \item Una volta raggiunta una prima versione stabile del server inizierà la fase di testing di quest'ultimo in parallelo all'implementazione dei client Web e Mobile.
+\end{enumerate}
+
+\noindent Riassumendo, gli obiettivi di sviluppo per questo progetto sono:
+
+\begin{itemize}
+    \item la realizzazione di un gioco distribuito, multipiattaforma, che ricorre all'utilizzo delle WebSocket;
+    \item realizzazione del software sfruttando un'architettura a Microservizi;
+    \item comprensione delle tecnologie WebSocket e Vert.X
+    \item sviluppo di un applicazione Java, con supporto Gradle ed implementazione del framework Vert.X, allo scopo di ottenere un'architettura modulare e scalabile;
+    \item sviluppo di un client web che possa connettersi al server e permettere all'utente di interagire con altri tramite dinamiche di gioco e chat in tempo reale;
+    \item sviluppo di un client mobile in react native, che consenta la portabilità del client web reso responsive su piattaforme mobili;
+    \item sviluppo di uno storage tramite database in MySql che consenta la persistenza dei dati inseriti e generati;
+    \item gestione dei ruoli degli utenti (Admin e User) che prendono parte al gioco;
+    \item gestione delle lobby di gioco, sia pubbliche che private, e con accesso tramite codice (nel caso delle lobby private) e tramite scelta della lingua (nel caso di lobby pubbliche).
+\end{itemize}
+\newpage
